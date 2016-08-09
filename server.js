@@ -1,7 +1,6 @@
 var express	=	require("express");
 var app		=	express();
 var Sequelize	= require("sequelize");
-var Student	=	require('/models/student.model.js');
 
 var sequelize = new Sequelize('ncsdb','root','root',
 {
@@ -14,6 +13,7 @@ var sequelize = new Sequelize('ncsdb','root','root',
 	}
 });
 
+
 sequelize
 .authenticate()
 .then(function(err){
@@ -25,12 +25,25 @@ sequelize
 
 sequelize.sync();
 
+var Student	=	sequelize.import('./models/student.model.js');
 
 app.get('/',function(req,res){
+	var email = req.param("email");
+	var contactNo = req.param("number");
+
+	Student
+   .findOrCreate({where: {'email': email}, defaults: {'contactNo': contactNo}})
+   .spread(function(student, created) {
+    console.log(student.get({
+      plain: true
+    }))
+    console.log(created);
+	})
+
 	res.send("welcome home!");
 
 });
 
 app.listen(3000,function(){
 	console.log("we are listening at port 3000\n type  http://localhost:3000/ in chrome");
-})
+});
