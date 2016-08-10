@@ -34,6 +34,7 @@ app.get('/',function(req,res){
 	Student
    .findOrCreate({where: {'email': email}, defaults: {'contactNo': contactNo}})
    .spread(function(student, created) {
+   	console.log(student);
     console.log(student.get({
       plain: true
     }))
