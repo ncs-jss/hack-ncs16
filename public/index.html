@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Demo</title>
+</head>
+
+<body ng-app="ncsApp" ng-controller="mainCtrl">
+<form>
+    <input type="text" name="userName" ng-model="userName"> {{userName}}
+    <br>
+    <input type="email" name="userEmail" ng-model="userEmail">
+    <input type="button" name="userSubmit" ng-model="userSubmit">
+</form>
+<script type="text/javascript" src="js/angular.min.js"></script>
+<script type="text/javascript" src="js/controllers.js"></script>
+<!-- <script type="text/javascript" src="js/directives.js"></script> -->
+<script type="text/javascript" src="js/factories.js"></script>
+<script>
+    /**
+    *  Module
+    *
+    * Description
+    */
+    var app = angular.module('ncsApp', ['mainCtrl', 'mainFactory']);
+</script>
+</body>
+</html>
