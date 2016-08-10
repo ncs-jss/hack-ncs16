@@ -1,3 +1,4 @@
+
 var express	=	require("express");
 var app		=	express();
 var Sequelize	= require("sequelize");
@@ -10,7 +11,7 @@ var sequelize = new Sequelize('ncsdb','root','root',
 		max: 100,
 		min: 0,
 		idle: 1000
-	}
+	},
 });
 
 
@@ -26,6 +27,7 @@ sequelize
 sequelize.sync();
 
 var Student	=	sequelize.import('./models/student.model.js');
+var Event 	= sequelize.import('./models/event.model.js');
 
 app.get('/',function(req,res){
 	var email = req.query.email;
