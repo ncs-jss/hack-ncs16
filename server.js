@@ -28,8 +28,8 @@ sequelize.sync();
 var Student	=	sequelize.import('./models/student.model.js');
 
 app.get('/',function(req,res){
-	var email = req.param("email");
-	var contactNo = req.param("number");
+	var email = req.query.email;
+	var contactNo = req.query.number
 
 	Student
    .findOrCreate({where: {'email': email}, defaults: {'contactNo': contactNo}})

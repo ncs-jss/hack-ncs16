@@ -1,12 +1,12 @@
-//models for student using sequelize
+//models for student using DataTypes
 module.exports = function  (sequelize, DataTypes) {
 	return  sequelize.define('Student',{
-			id : {type : sequelize.INTEGER, autoIncrement : true, primaryKey : true},
-			email : { type : sequelize.STRING , allowNull : false},
-			name : { type : sequelize.STRING },
-			year : { type : sequelize.INTEGER,},
-			contactNo : { type : sequelize.STRING,allowNull : false},
-			admissionNo : { type : sequelize.STRING}
+			id : {type : DataTypes.INTEGER, autoIncrement : true, primaryKey : true},
+			email : { type : DataTypes.STRING , allowNull : false},
+			name : { type : DataTypes.STRING },
+			year : { type : DataTypes.INTEGER,},
+			contactNo : { type : DataTypes.STRING,allowNull : false},
+			admissionNo : { type : DataTypes.STRING}
 	});
 }
 // }
