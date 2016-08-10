@@ -2,6 +2,10 @@
 var express	=	require("express");
 var app		=	express();
 var Sequelize	= require("sequelize");
+var bodyParser  = require("body-parser");
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 var sequelize = new Sequelize('ncsdb','root','root',
 {
@@ -29,9 +33,9 @@ sequelize.sync();
 var Student	=	sequelize.import('./models/student.model.js');
 var Event 	= sequelize.import('./models/event.model.js');
 
-app.get('/',function(req,res){
-	var email = req.query.email;
-	var contactNo = req.query.number
+app.post('/register',function(req,res){
+	var email = req.body.email;
+	var contactNo = req.body.number;
 
 	Student
    .findOrCreate({where: {'email': email}, defaults: {'contactNo': contactNo}})
