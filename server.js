@@ -33,7 +33,7 @@ sequelize.sync();
 var Student	=	sequelize.import('./models/student.model.js');
 var Event 	= sequelize.import('./models/event.model.js');
 
-app.post('/register',function(req,res){
+app.post('/studentRegister',function(req,res){
 	var email = req.body.email;
 	var contactNo = req.body.number;
 
@@ -52,13 +52,35 @@ app.post('/register',function(req,res){
 });
 
 app.get('/events', function(req,res){
-	Event.find()
+	Event.find().then(function(err,result){
+		res.send(result);
+
+	})
 });
+
+app.post("/event",function  (req,res) {
+	var eventName = req.body.eventName;
+	var displayStartTime = req.body.displayStartTime;
+	var displayEndTime = req.body.displayEndTime; 
+
+	Event
+	.findOrCreate({where: {'eventName': eventName}, defaults: {'displayEndTime': displayEndTime ,'displayStartTime' : displayStartTime}})
+	.spread(function(events, created) {
+		//console.log(student);
+		console.log(events.get({
+			plain: true
+		}))
+		res.send("created!");
+	})
+
+	
+
+})
 
 
 app.get('/',function(req,res){
 	console.log(__dirname+'/public');
-	res.sendFile('public/index.html' , { root : __dirname});
+	res.sendFile('/index2.html' , { root : __dirname+'\\public'});
 })
 
 
