@@ -73,8 +73,32 @@ app.post("/event",function  (req,res) {
 		res.send("created!");
 	})
 
-	
+})
 
+
+
+app.get('/event',function(req,res){
+	Event
+	  .findAndCountAll({
+	     where: { $and : [ {
+		  displayStartTime: {
+		    $lt: new Date()
+		  }
+		  },{ 
+		  displayEndTime: {
+		    $gt: new Date()
+		  } 
+
+		}]
+// createdAt
+	     },
+	     offset: 10,
+	     limit: 2
+	  })
+	  .then(function(result) {
+	    console.log(result.count);
+	    console.log(result.rows);
+	  });
 })
 
 
