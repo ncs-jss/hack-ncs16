@@ -90,14 +90,11 @@ app.get('/event',function(req,res){
 		  } 
 
 		}]
-// createdAt
-	     },
-	     offset: 10,
-	     limit: 2
+	     }
 	  })
 	  .then(function(result) {
 	    console.log(result.count);
-	    console.log(result.rows);
+	    res.send(result.rows);
 	  });
 })
 
