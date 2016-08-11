@@ -4,6 +4,13 @@ angular.module('mainFactory',['ncsApp'])
         console.log('test');
         var factory = {};
 
+        factory.sendEventData = function(eventDetails){
+              return $http.post('/events',eventDetails)
+                .error(function (data) {
+                    console.log('There was an error!', data);
+              });
+        };
+
         factory.sendUserData = function(userDetails) {
             // return posts;
             return $http.post('/register',userDetails)

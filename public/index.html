@@ -1,17 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="ncsApp" ng-controller="mainCtrl">
 <head>
     <title>Demo</title>
     <base href="/">
 </head>
-
-<body ng-app="ncsApp" ng-controller="mainCtrl">
-    <form>
-        <input type="text" name="userName" ng-model="userName" placeholder="Namae">
-        <input type="email" name="userEmail" ng-model="userEmail" placeholder="Email">
-        <input type="button" name="userSubmit" ng-model="userSubmit" value="Submit">
-        <ng-view></ng-view>
-    </form>
+<body>
+    <ng-view></ng-view>
     <script type="text/javascript" src="js/angular.min.js"></script>
     <script type="text/javascript" src="js/controllers.js"></script>
     <!--  <script type="text/javascript" src="js/directives.js"></script> -->
@@ -24,14 +18,23 @@
         *
         * Description
         */
-        var app = angular.module('ncsApp', ['mainCtrl', 'mainFactory','ngRoute']);
+        var app = angular.module('ncsApp', ['Ctrls', 'mainFactory','ngRoute']);
         app.config(function($routeProvider, $locationProvider){
         $routeProvider
           .when('/',{
-              template: '<h1>Work</h1><a href="/test">Test Route</a>'
+              template: '<h1>Hello click to go</h1><a href="/eventRegister">Register Event</a><br><a href="/events">View Events</a><br><a href="/studentRegister">Register as Student</a><br>'
           })
-          .when('/test',{
-              template: '<h1>Test</h1><a href="/">Back</a>'
+          .when('/eventRegister',{
+              templateUrl: 'partials/registerEventForm.html',
+              controller: 'eventCtrl'
+          })
+          .when('/events',{
+              templateUrl: 'partials/events.html',
+              controller: 'eventCtrl'
+          })
+          .when('/studentRegister',{
+              templateUrl: 'partials/registerStudentForm.html',
+              controller: 'studentRegisterCtrl'
           })
           .otherwise({
             template: '<h1>Not Found</h1>',
@@ -40,6 +43,13 @@
           // use the HTML5 History API to remove # from routes
           $locationProvider.html5Mode(true);
         });
+
+        function $(elem){
+          return document.querySelector(elem);
+        }
+        function $$(elem){
+          return document.querySelectorAll(elem);
+        }
     </script>
 </body>
 </html>
