@@ -51,6 +51,8 @@ app.post('/register',function(req,res){
 
 });
 
+app.get('/events', function(req,res){});
+
 app.listen(3000,function(){
 	console.log("we are listening at port 3000\n type  http://localhost:3000/ in chrome");
 });
