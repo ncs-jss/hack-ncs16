@@ -5,16 +5,20 @@ angular.module('Ctrls', [])
         console.log('test');
     })
     .controller('studentCtrl',
-      function mainCtrl($scope, registerFactory) {
+      function Ctrl($scope, registerFactory) {
         console.log('test');
-        var userDetails = {
-            name : $scope.userName,
-            phno : $scope.userNo
-        };
-        registerFactory.sendUserData(userDetails)
-            .success(function(jsonData, statusCode){
-              console.log('The request was successful!', statusCode,jsonData);
-          });
+        if($("#submitBtn")){
+            $("#submitBtn").addEventListener("click",function() {
+                var userDetails = {
+                    name : $scope.userName,
+                    phno : $scope.userNo
+                };
+                registerFactory.sendUserData(userDetails)
+                    .success(function(jsonData, statusCode){
+                      console.log('The request was successful!', statusCode,jsonData);
+                  });
+            });
+        }
 
     })
     .controller('eventCtrl',
