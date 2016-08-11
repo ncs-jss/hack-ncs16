@@ -38,20 +38,30 @@ app.post('/register',function(req,res){
 	var contactNo = req.body.number;
 
 	Student
-   .findOrCreate({where: {'email': email}, defaults: {'contactNo': contactNo}})
-   .spread(function(student, created) {
-   	console.log(student);
-    console.log(student.get({
-      plain: true
-    }))
-    console.log(created);
+	.findOrCreate({where: {'email': email}, defaults: {'contactNo': contactNo}})
+	.spread(function(student, created) {
+		console.log(student);
+		console.log(student.get({
+			plain: true
+		}))
+		console.log(created);
 	})
 
 	res.send("welcome home!");
 
 });
 
-app.get('/events', function(req,res){});
+app.get('/events', function(req,res){
+	Event.find()
+});
+
+
+app.get('/',function(req,res){
+	console.log(__dirname+'/public');
+	res.sendFile('public/index.html' , { root : __dirname});
+})
+
+
 
 app.listen(3000,function(){
 	console.log("we are listening at port 3000\n type  http://localhost:3000/ in chrome");
