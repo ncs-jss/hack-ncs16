@@ -1,6 +1,10 @@
 /* Controller */
 angular.module('Ctrls', [])
-    .controller('mainCtrl',
+    .controller('Ctrls',
+      function mainCtrl($scope) {
+        console.log('test');
+    })
+    .controller('studentCtrl',
       function mainCtrl($scope, registerFactory) {
         console.log('test');
         var userDetails = {
@@ -11,22 +15,26 @@ angular.module('Ctrls', [])
             .success(function(jsonData, statusCode){
               console.log('The request was successful!', statusCode,jsonData);
           });
-        registerFactory.getEventsData()
-            .success(function(jsonData, statusCode){
-              console.log('The request was successful!', statusCode,jsonData);
-          });
 
     })
     .controller('eventCtrl',
       function Ctrl($scope, registerFactory) {
-        var eventDetails = {
-            name : $scope.userName,
-            phno : $scope.userNo
-        };
-        $("#submitBtn").addEventListener("click",function() {
-            registerFactory.sendEventData(eventDetails)
-                .success(function(jsonData, statusCode){
-                  console.log('The request was successful!', statusCode,jsonData);
-              });
-        })
+        if($("#submitBtn")){
+            $("#submitBtn").addEventListener("click",function() {
+                var eventDetails = {
+                    name : $scope.eventName,
+                    phno : $scope.eventNo
+                };
+                registerFactory.sendEventData(eventDetails)
+                    .success(function(jsonData, statusCode){
+                      console.log('The request was successful!', statusCode,jsonData);
+                  });
+            });
+
+        }
+        registerFactory.getEventsData()
+            .success(function(jsonData, statusCode){
+                $scope.events = jsonData;
+              console.log('The request was successful!', statusCode,jsonData);
+          });
     });
