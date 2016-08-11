@@ -96,9 +96,9 @@ app.get('/event',function(req,res){
 	    console.log(result.count);
 	    res.send(result.rows);
 	  });
-})
+});
 
-
+  
 app.get('/',function(req,res){
 	console.log(__dirname+'/public');
 	res.sendFile('/index2.html' , { root : __dirname+'\\public'});
