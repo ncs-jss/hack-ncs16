@@ -2,26 +2,44 @@
 <html>
 <head>
     <title>Demo</title>
+    <base href="/">
 </head>
 
 <body ng-app="ncsApp" ng-controller="mainCtrl">
-<form>
-    <input type="text" name="userName" ng-model="userName"> {{userName}}
-    <br>
-    <input type="email" name="userEmail" ng-model="userEmail">
-    <input type="button" name="userSubmit" ng-model="userSubmit">
-</form>
-<script type="text/javascript" src="js/angular.min.js"></script>
-<script type="text/javascript" src="js/controllers.js"></script>
-<!-- <script type="text/javascript" src="js/directives.js"></script> -->
-<script type="text/javascript" src="js/factories.js"></script>
-<script>
-    /**
-    *  Module
-    *
-    * Description
-    */
-    var app = angular.module('ncsApp', ['mainCtrl', 'mainFactory']);
-</script>
+    <form>
+        <input type="text" name="userName" ng-model="userName" placeholder="Namae">
+        <input type="email" name="userEmail" ng-model="userEmail" placeholder="Email">
+        <input type="button" name="userSubmit" ng-model="userSubmit" value="Submit">
+        <ng-view></ng-view>
+    </form>
+    <script type="text/javascript" src="js/angular.min.js"></script>
+    <script type="text/javascript" src="js/controllers.js"></script>
+    <!--  <script type="text/javascript" src="js/directives.js"></script> -->
+    <script type="text/javascript" src="js/factories.js"></script>
+    <script data-require="angular-route@1.4.3" data-semver="1.4.3" src="https://code.angularjs.org/1.4.3/angular-route.js"></script>
+    <!-- <script type="text/javascript" src="js/routes.js"></script> -->
+    <script>
+        /**
+        *  Module
+        *
+        * Description
+        */
+        var app = angular.module('ncsApp', ['mainCtrl', 'mainFactory','ngRoute']);
+        app.config(function($routeProvider, $locationProvider){
+        $routeProvider
+          .when('/',{
+              template: '<h1>Work</h1><a href="/test">Test Route</a>'
+          })
+          .when('/test',{
+              template: '<h1>Test</h1><a href="/">Back</a>'
+          })
+          .otherwise({
+            template: '<h1>Not Found</h1>',
+            redirectTo: '/'
+          });
+          // use the HTML5 History API to remove # from routes
+          $locationProvider.html5Mode(true);
+        });
+    </script>
 </body>
 </html>

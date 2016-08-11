@@ -1,5 +1,5 @@
 /* Controller */
-angular.module('mainCtrl', ['ncsApp'])
+angular.module('mainCtrl', [])
     .controller('mainCtrl',
       function mainCtrl($scope, registerFactory) {
         console.log('test');
